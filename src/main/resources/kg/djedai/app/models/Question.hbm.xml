@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD/EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="kg.djedai.app.models">
+    <class name="Question" table="questions">
+        <meta attribute="class-description">
+            This class contains the question detail
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <property name="text" column="text" type="string"/>
+        <property name="complexity" column="complexity" type="string"/>
+        <property name="addition" column="addition" type="string"/>
+        <many-to-one name="test"  lazy="false" column="test_id" class="Test" cascade="save-update"/>
+
+    </class>
+
+</hibernate-mapping>

@@ -4,5 +4,29 @@
 
 <hibernate-configuration>
     <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/user_testing</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">admin12345</property>
+
+        <property name="hibernate.c3p0.min_size">7</property>
+        <property name="hibernate.c3p0.max_size">53</property>
+        <property name="hibernate.c3p0.timeout">100</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">1000</property>
+        <property name="hibernate.c3p0.validate">true</property>
+        <!-- List of XML mapping files -->
+        <mapping resource="kg/djedai/app/models/Answer.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/User.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Role.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Group.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/GuestUser.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Question.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Result.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Student.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Teacher.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Test.hbm.xml"/>
+
     </session-factory>
 </hibernate-configuration>

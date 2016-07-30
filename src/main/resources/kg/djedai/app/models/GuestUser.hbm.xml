@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD/EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="kg.djedai.app.models">
+    <class name="GuestUser" table="guestuser">
+        <meta attribute="class-description">
+            This class contains the guest user detail
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <property name="surname" column="surname" type="string"/>
+        <property name="name" column="name" type="string"/>
+        <property name="lastName" column="lastname" type="string"/>
+        <many-to-one name="group"  lazy="false" column="group_id" class="Group" cascade="save-update"/>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD/EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="kg.djedai.app.models">
+    <class name="Answer" table="answers">
+        <meta attribute="class-description">
+            This class contains the student detail
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <property name="text" column="text" type="string"/>
+        <property name="isCorrect" column="is_correct" type="int"/>
+        <property name="point" column="point" type="int"/>
+        <many-to-one name="question"  lazy="false" column="question_id" class="Question" cascade="save-update"/>
+
+    </class>
+
+</hibernate-mapping>

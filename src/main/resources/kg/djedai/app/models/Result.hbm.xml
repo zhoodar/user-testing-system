@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD/EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="kg.djedai.app.models">
+    <class name="Result" table="results">
+        <meta attribute="class-description">
+            This class contains the result detail
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="student"  lazy="false" column="student_id" class="Student" cascade="save-update"/>
+        <property name="result" column="res_text" type="string"/>
+        <property name="score" column="score" type="int"/>
+        <property name="date" column="date" type="date"/>
+        <property name="time" column="time" type="time"/>
+        <many-to-one name="test"  lazy="false" column="test_id" class="Test" cascade="save-update"/>
+
+    </class>
+
+</hibernate-mapping>
