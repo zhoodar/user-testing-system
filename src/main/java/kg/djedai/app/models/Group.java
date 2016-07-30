@@ -5,4 +5,14 @@ package kg.djedai.app.models;
  * @since 28.07.2016.
  */
 public class Group extends Base {
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
