@@ -14,7 +14,7 @@
         <property name="surname" column="surname" type="string"/>
         <property name="name" column="name" type="string"/>
         <property name="lastName" column="lastname" type="string"/>
-        <many-to-one name="user"  lazy="false" column="user_id" class="User" cascade="save-update"/>
+        <one-to-one name="user"  lazy="false"  class="User" cascade="all"/>
 
     </class>
 
