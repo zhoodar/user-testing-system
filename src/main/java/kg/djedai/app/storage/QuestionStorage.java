@@ -1,7 +1,10 @@
 package kg.djedai.app.storage;
 
 import kg.djedai.app.models.Question;
+import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Collection;
 
@@ -10,22 +13,33 @@ import java.util.Collection;
  * @since 04.08.2016.
  */
 public class QuestionStorage implements DAO<Question> {
+
+    private final HibernateTransaction hibernateTransaction;
+
+    public QuestionStorage() {
+        hibernateTransaction = new HibernateTransaction();
+    }
+
+
     /**
      * Returns the Collection of elements in a store
      *
      * @return collection of elements
      */
     public Collection<Question> getAll() {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)-> session.createQuery("from Question").list());
     }
 
     /**
      * Inserts the specified element to a store
      *
-     * @param o adding object
+     * @param question adding object
      */
-    public void create(Question o) {
-
+    public void create(Question question) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.save(question); return null;
+                }
+        );
     }
 
     /**
@@ -35,25 +49,33 @@ public class QuestionStorage implements DAO<Question> {
      * @return element at the specified position
      */
     public Question read(int id) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->session.get(Question.class,id));
     }
 
     /**
      * Replaces the first occurrence of the specified element in store
      *
-     * @param o element to be stored
+     * @param question element to be stored
      */
-    public void update(Question o) {
-
+    public void update(Question question) {
+        this.hibernateTransaction.transaction((Session session) -> {
+                    session.update(question);
+                    return null;
+                }
+        );
     }
 
     /**
      * Removes the first occurrence of the specified element from store
      *
-     * @param o element to be removed
+     * @param question element to be removed
      */
-    public void delete(Question o) {
-
+    public void delete(Question question) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.delete(question);
+                    return null;
+                }
+        );
     }
 
     /**
@@ -64,13 +86,17 @@ public class QuestionStorage implements DAO<Question> {
      * @return the element match
      */
     public Question findByName(String name) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->{
+            final Query query = session.createQuery("from Question q where q.text=:name");
+            query.setParameter("name",name);
+            return (Question) query.list().iterator().next();
+        });
     }
 
     /**
      * Closes the opened session
      */
     public void close() {
-
+        this.hibernateTransaction.close();
     }
 }

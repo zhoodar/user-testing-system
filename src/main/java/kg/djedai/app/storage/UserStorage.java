@@ -1,7 +1,10 @@
 package kg.djedai.app.storage;
 
 import kg.djedai.app.models.User;
+import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Collection;
 
@@ -10,22 +13,33 @@ import java.util.Collection;
  * @since 04.08.2016.
  */
 public class UserStorage implements DAO<User> {
+
+    private final HibernateTransaction hibernateTransaction;
+
+    public UserStorage() {
+        hibernateTransaction = new HibernateTransaction();
+    }
+
+
     /**
      * Returns the Collection of elements in a store
      *
      * @return collection of elements
      */
     public Collection<User> getAll() {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)-> session.createQuery("from User").list());
     }
 
     /**
      * Inserts the specified element to a store
      *
-     * @param o adding object
+     * @param user adding object
      */
-    public void create(User o) {
-
+    public void create(User user) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.save(user); return null;
+                }
+        );
     }
 
     /**
@@ -35,25 +49,33 @@ public class UserStorage implements DAO<User> {
      * @return element at the specified position
      */
     public User read(int id) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->session.get(User.class,id));
     }
 
     /**
      * Replaces the first occurrence of the specified element in store
      *
-     * @param o element to be stored
+     * @param user element to be stored
      */
-    public void update(User o) {
-
+    public void update(User user) {
+        this.hibernateTransaction.transaction((Session session) -> {
+                    session.update(user);
+                    return null;
+                }
+        );
     }
 
     /**
      * Removes the first occurrence of the specified element from store
      *
-     * @param o element to be removed
+     * @param user element to be removed
      */
-    public void delete(User o) {
-
+    public void delete(User user) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.delete(user);
+                    return null;
+                }
+        );
     }
 
     /**
@@ -64,13 +86,17 @@ public class UserStorage implements DAO<User> {
      * @return the element match
      */
     public User findByName(String name) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->{
+            final Query query = session.createQuery("from User u where u.login=:name");
+            query.setParameter("name",name);
+            return (User) query.list().iterator().next();
+        });
     }
 
     /**
      * Closes the opened session
      */
     public void close() {
-
+        this.hibernateTransaction.close();
     }
 }

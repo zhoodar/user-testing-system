@@ -1,7 +1,9 @@
 package kg.djedai.app.storage;
 
 import kg.djedai.app.models.Role;
+import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
+import org.hibernate.Session;
 
 import java.util.Collection;
 
@@ -10,6 +12,13 @@ import java.util.Collection;
  * @since 04.08.2016.
  */
 public class RoleStorage implements DAO<Role> {
+
+    private final HibernateTransaction hibernateTransaction;
+
+    public RoleStorage() {
+        hibernateTransaction = new HibernateTransaction();
+    }
+
     /**
      * Returns the Collection of elements in a store
      *
@@ -22,10 +31,13 @@ public class RoleStorage implements DAO<Role> {
     /**
      * Inserts the specified element to a store
      *
-     * @param o adding object
+     * @param role adding object
      */
-    public void create(Role o) {
-
+    public void create(Role role) {
+        this.hibernateTransaction.transaction((Session session)->{
+            session.save(role);
+            return null;
+        });
     }
 
     /**
@@ -50,10 +62,13 @@ public class RoleStorage implements DAO<Role> {
     /**
      * Removes the first occurrence of the specified element from store
      *
-     * @param o element to be removed
+     * @param role element to be removed
      */
-    public void delete(Role o) {
-
+    public void delete(Role role) {
+        this.hibernateTransaction.transaction((Session session)->{
+            session.delete(role);
+            return null;
+        });
     }
 
     /**

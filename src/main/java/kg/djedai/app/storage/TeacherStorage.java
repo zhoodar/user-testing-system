@@ -1,7 +1,10 @@
 package kg.djedai.app.storage;
 
 import kg.djedai.app.models.Teacher;
+import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Collection;
 
@@ -10,22 +13,33 @@ import java.util.Collection;
  * @since 04.08.2016.
  */
 public class TeacherStorage implements DAO<Teacher> {
+
+    private final HibernateTransaction hibernateTransaction;
+
+    public TeacherStorage() {
+        hibernateTransaction = new HibernateTransaction();
+    }
+
+
     /**
      * Returns the Collection of elements in a store
      *
      * @return collection of elements
      */
     public Collection<Teacher> getAll() {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)-> session.createQuery("from Teacher").list());
     }
 
     /**
      * Inserts the specified element to a store
      *
-     * @param o adding object
+     * @param teacher adding object
      */
-    public void create(Teacher o) {
-
+    public void create(Teacher teacher) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.save(teacher); return null;
+                }
+        );
     }
 
     /**
@@ -35,25 +49,33 @@ public class TeacherStorage implements DAO<Teacher> {
      * @return element at the specified position
      */
     public Teacher read(int id) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->session.get(Teacher.class,id));
     }
 
     /**
      * Replaces the first occurrence of the specified element in store
      *
-     * @param o element to be stored
+     * @param teacher element to be stored
      */
-    public void update(Teacher o) {
-
+    public void update(Teacher teacher) {
+        this.hibernateTransaction.transaction((Session session) -> {
+                    session.update(teacher);
+                    return null;
+                }
+        );
     }
 
     /**
      * Removes the first occurrence of the specified element from store
      *
-     * @param o element to be removed
+     * @param teacher element to be removed
      */
-    public void delete(Teacher o) {
-
+    public void delete(Teacher teacher) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.delete(teacher);
+                    return null;
+                }
+        );
     }
 
     /**
@@ -64,13 +86,17 @@ public class TeacherStorage implements DAO<Teacher> {
      * @return the element match
      */
     public Teacher findByName(String name) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->{
+            final Query query = session.createQuery("from Teacher t where t.name=:name");
+            query.setParameter("name",name);
+            return (Teacher) query.list().iterator().next();
+        });
     }
 
     /**
      * Closes the opened session
      */
     public void close() {
-
+        this.hibernateTransaction.close();
     }
 }

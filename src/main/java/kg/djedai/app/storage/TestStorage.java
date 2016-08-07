@@ -1,7 +1,10 @@
 package kg.djedai.app.storage;
 
 import kg.djedai.app.models.Test;
+import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Collection;
 
@@ -10,22 +13,33 @@ import java.util.Collection;
  * @since 04.08.2016.
  */
 public class TestStorage implements DAO<Test> {
+
+    private final HibernateTransaction hibernateTransaction;
+
+    public TestStorage() {
+        hibernateTransaction = new HibernateTransaction();
+    }
+
+
     /**
      * Returns the Collection of elements in a store
      *
      * @return collection of elements
      */
     public Collection<Test> getAll() {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)-> session.createQuery("from Test").list());
     }
 
     /**
      * Inserts the specified element to a store
      *
-     * @param o adding object
+     * @param test adding object
      */
-    public void create(Test o) {
-
+    public void create(Test test) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.save(test); return null;
+                }
+        );
     }
 
     /**
@@ -35,25 +49,33 @@ public class TestStorage implements DAO<Test> {
      * @return element at the specified position
      */
     public Test read(int id) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->session.get(Test.class,id));
     }
 
     /**
      * Replaces the first occurrence of the specified element in store
      *
-     * @param o element to be stored
+     * @param test element to be stored
      */
-    public void update(Test o) {
-
+    public void update(Test test) {
+        this.hibernateTransaction.transaction((Session session) -> {
+                    session.update(test);
+                    return null;
+                }
+        );
     }
 
     /**
      * Removes the first occurrence of the specified element from store
      *
-     * @param o element to be removed
+     * @param test element to be removed
      */
-    public void delete(Test o) {
-
+    public void delete(Test test) {
+        this.hibernateTransaction.transaction((Session session)-> {
+                    session.delete(test);
+                    return null;
+                }
+        );
     }
 
     /**
@@ -64,13 +86,17 @@ public class TestStorage implements DAO<Test> {
      * @return the element match
      */
     public Test findByName(String name) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->{
+            final Query query = session.createQuery("from Test t where t.name=:name");
+            query.setParameter("name",name);
+            return (Test) query.list().iterator().next();
+        });
     }
 
     /**
      * Closes the opened session
      */
     public void close() {
-
+        this.hibernateTransaction.close();
     }
 }

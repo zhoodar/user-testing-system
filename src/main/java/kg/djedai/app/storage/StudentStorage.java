@@ -1,7 +1,10 @@
 package kg.djedai.app.storage;
 
 import kg.djedai.app.models.Student;
+import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.Collection;
 
@@ -11,22 +14,32 @@ import java.util.Collection;
  */
 public class StudentStorage implements DAO<Student> {
 
+    private final HibernateTransaction hibernateTransaction;
+
+    public StudentStorage() {
+        hibernateTransaction = new HibernateTransaction();
+    }
+
+
     /**
      * Returns the Collection of elements in a store
      *
      * @return collection of elements
      */
     public Collection<Student> getAll() {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)-> session.createQuery("from Student").list());
     }
 
     /**
      * Inserts the specified element to a store
      *
-     * @param o adding object
+     * @param student adding object
      */
-    public void create(Student o) {
-
+    public void create(Student student) {
+        this.hibernateTransaction.transaction((Session session)-> {
+            session.save(student); return null;
+            }
+        );
     }
 
     /**
@@ -36,25 +49,33 @@ public class StudentStorage implements DAO<Student> {
      * @return element at the specified position
      */
     public Student read(int id) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->session.get(Student.class,id));
     }
 
     /**
      * Replaces the first occurrence of the specified element in store
      *
-     * @param o element to be stored
+     * @param student element to be stored
      */
-    public void update(Student o) {
-
+    public void update(Student student) {
+        this.hibernateTransaction.transaction((Session session) -> {
+            session.update(student);
+            return null;
+            }
+        );
     }
 
     /**
      * Removes the first occurrence of the specified element from store
      *
-     * @param o element to be removed
+     * @param student element to be removed
      */
-    public void delete(Student o) {
-
+    public void delete(Student student) {
+        this.hibernateTransaction.transaction((Session session)-> {
+            session.delete(student);
+            return null;
+            }
+        );
     }
 
     /**
@@ -65,13 +86,17 @@ public class StudentStorage implements DAO<Student> {
      * @return the element match
      */
     public Student findByName(String name) {
-        return null;
+        return this.hibernateTransaction.transaction((Session session)->{
+            final Query query = session.createQuery("from Student p where p.name=:name");
+            query.setParameter("name",name);
+            return (Student) query.list().iterator().next();
+        });
     }
 
     /**
      * Closes the opened session
      */
     public void close() {
-
+        this.hibernateTransaction.close();
     }
 }
