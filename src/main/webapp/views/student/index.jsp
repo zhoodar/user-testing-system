@@ -33,10 +33,16 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="#">Тестирование</a></li>
-                <li><a href="#">Студенту</a></li>
-
+                <li class="active"><a href="#">Тестирование</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Student <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Настройки</a></li>
+                    </ul>
+                </li>
+                <li> <a href="${pageContext.servletContext.contextPath}/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
 
             </ul>
         </div><!--/.nav-collapse -->

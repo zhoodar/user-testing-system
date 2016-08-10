@@ -20,7 +20,7 @@
 </head>
 <body>
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -33,30 +33,18 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="${pageContext.servletContext.contextPath}/administration"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="${pageContext.servletContext.contextPath}/administration/tests">Тесты</a></li>
-                <li class="dropdown">
-                    <a href="${pageContext.servletContext.contextPath}/administration/groups" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Студенты <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${pageContext.servletContext.contextPath}/administration/add/students">Добавить студента</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="${pageContext.servletContext.contextPath}/administration/teachers" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Преподователи <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="${pageContext.servletContext.contextPath}/administration/add/teacher">Добавить преподователа</a></li>
-                    </ul>
-                </li>
-                <li><a href="">Резултаты тестов</a></li>
+                <li ><a href="${pageContext.servletContext.contextPath}/teacher">Тесты</a></li>
+                <li><a href="${pageContext.servletContext.contextPath}/teacher/add/test">Добавить тест</a></li>
+                <li class="active"> <a href="${pageContext.servletContext.contextPath}/teacher/results">Резултаты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> admin <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Teacher <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Настройки</a></li>
                     </ul>
                 </li>
-                <li><a href="${pageContext.servletContext.contextPath}/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a> </li>
+                <li> <a href="${pageContext.servletContext.contextPath}/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -65,10 +53,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="page-header">
-                <h2>Most Important Is Education</h2>
-            </div>
-            <p class="lead"> Admin</p>
+            <p class="lead">Резултаты всех тестов</p>
+
+           Резултат по тесту <a href="#">********</a>
         </div>
     </div>
 </div>

@@ -15,4 +15,14 @@ public class TeacherController {
     public String main(){
         return "teacher/index";
     }
+
+    @RequestMapping(value = "/teacher/add/test",method = RequestMethod.GET)
+    public String getAddTest(){
+        return "teacher/createTest";
+    }
+
+    @RequestMapping(value = "/teacher/results",method = RequestMethod.GET)
+    public String getResults(){
+        return "teacher/allresults";
+    }
 }

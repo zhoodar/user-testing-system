@@ -12,9 +12,13 @@
             <generator class="identity"/>
         </id>
         <property name="text" column="text" type="string"/>
-        <property name="complexity" column="complexity" type="string"/>
+        <property name="complexity" column="complexity" type="int"/>
         <property name="addition" column="addition" type="string"/>
         <many-to-one name="test"  lazy="false" column="test_id" class="Test" cascade="save-update"/>
+        <bag name="answers" table="answers" lazy="false" inverse="true" cascade="all" >
+            <key column="question_id" not-null="true"/>
+            <one-to-many class="Answer"/>
+        </bag>
 
     </class>
 

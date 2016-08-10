@@ -12,8 +12,14 @@
             <generator class="identity"/>
         </id>
         <property name="name" column="name" type="string"/>
+
+        <many-to-one name="category"  lazy="false" column="category_id" class="Category" cascade="save-update"/>
         <many-to-one name="teacher"  lazy="false" column="teacher_id" class="Teacher" cascade="save-update"/>
         <many-to-one name="group"  lazy="false" column="group_id" class="Group" cascade="save-update"/>
+        <bag name="questions" table="questions" lazy="false" inverse="true" cascade="all">
+            <key column="test_id" not-null="true"/>
+            <one-to-many class="Question"/>
+        </bag>
 
     </class>
 

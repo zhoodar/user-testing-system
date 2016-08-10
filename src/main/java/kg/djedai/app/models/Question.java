@@ -1,5 +1,8 @@
 package kg.djedai.app.models;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 /**
  * @author Zhoodar
  * @since 28.07.2016.
@@ -10,6 +13,7 @@ public class Question extends Base {
     private int complexity;
     private Test test;
     private String addition;
+    private List<Answer>  answers = new CopyOnWriteArrayList<>();
 
     public String getText() {
         return text;
@@ -41,5 +45,13 @@ public class Question extends Base {
 
     public void setAddition(String addition) {
         this.addition = addition;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }
