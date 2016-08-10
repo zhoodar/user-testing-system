@@ -23,7 +23,17 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
     <mvc:resources mapping="/resources/**" location="/resources/" />
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="configLocations" value="classpath:hibernate.cfg.xml"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
 
     <context:annotation-config/>
     <context:component-scan base-package="kg.djedai.app"/>

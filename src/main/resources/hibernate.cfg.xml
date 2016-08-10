@@ -11,11 +11,13 @@
         <property name="hibernate.connection.password">admin12345</property>
 
         <property name="hibernate.c3p0.min_size">7</property>
-        <property name="hibernate.c3p0.max_size">53</property>
+        <property name="hibernate.c3p0.max_size">55</property>
         <property name="hibernate.c3p0.timeout">100</property>
-        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.max_statements">70</property>
         <property name="hibernate.c3p0.idle_test_period">1000</property>
         <property name="hibernate.c3p0.validate">true</property>
+        <property name="show_sql">true</property>
+
         <!-- List of XML mapping files -->
         <mapping resource="kg/djedai/app/models/Answer.hbm.xml"/>
         <mapping resource="kg/djedai/app/models/User.hbm.xml"/>
@@ -27,6 +29,7 @@
         <mapping resource="kg/djedai/app/models/Student.hbm.xml"/>
         <mapping resource="kg/djedai/app/models/Teacher.hbm.xml"/>
         <mapping resource="kg/djedai/app/models/Test.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/Category.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
