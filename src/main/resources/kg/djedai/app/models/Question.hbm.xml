@@ -15,6 +15,8 @@
         <property name="complexity" column="complexity" type="int"/>
         <property name="addition" column="addition" type="string"/>
         <many-to-one name="test"  lazy="false" column="test_id" class="Test" cascade="save-update"/>
+        <many-to-one name="questionType"  lazy="false" column="question_type_id" class="QuestionType" cascade="save-update"/>
+        <property name="point" column="point" type="int"/>
         <bag name="answers" table="answers" lazy="false" inverse="true" cascade="all" >
             <key column="question_id" not-null="true"/>
             <one-to-many class="Answer"/>

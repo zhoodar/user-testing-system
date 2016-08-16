@@ -30,6 +30,8 @@
         <mapping resource="kg/djedai/app/models/Teacher.hbm.xml"/>
         <mapping resource="kg/djedai/app/models/Test.hbm.xml"/>
         <mapping resource="kg/djedai/app/models/Category.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/QuestionType.hbm.xml"/>
+        <mapping resource="kg/djedai/app/models/TestConfig.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

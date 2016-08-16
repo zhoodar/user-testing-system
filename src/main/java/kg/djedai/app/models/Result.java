@@ -1,6 +1,5 @@
 package kg.djedai.app.models;
 
-import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -14,7 +13,7 @@ public class Result extends Base {
     private int score;
     private Test test;
     private Date date;
-    private Time time;
+
 
     public Student getStudent() {
         return student;
@@ -56,11 +55,4 @@ public class Result extends Base {
         this.date = date;
     }
 
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
 }

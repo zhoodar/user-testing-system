@@ -4,16 +4,14 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="kg.djedai.app.models">
-    <class name="Answer" table="answers">
+    <class name="QuestionType" table="questiontype">
         <meta attribute="class-description">
-            This class contains the student detail
+            This class contains the question type detail
         </meta>
         <id name="id" type="int" column="uid">
             <generator class="identity"/>
         </id>
-        <property name="text" column="text" type="string"/>
-        <property name="isCorrect" column="is_correct" type="int"/>
-        <many-to-one name="question"  lazy="false" column="question_id" class="Question" cascade="save-update"/>
+        <property name="name" column="name" type="string"/>
 
     </class>
 

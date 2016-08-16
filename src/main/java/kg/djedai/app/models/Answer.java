@@ -9,7 +9,6 @@ public class Answer extends Base {
     private Question question;
     private String text;
     private int isCorrect;
-    private int point;
 
     public Question getQuestion() {
         return question;
@@ -35,11 +34,4 @@ public class Answer extends Base {
         this.isCorrect = isCorrect;
     }
 
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
 }
