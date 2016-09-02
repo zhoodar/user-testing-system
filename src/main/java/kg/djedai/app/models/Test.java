@@ -17,10 +17,10 @@ public class Test extends Base {
 
     private String name;
     private Category category;
-    private TestConfig testConfig;
     private String description;
     private Teacher teacher;
     private List<Question> questions = new CopyOnWriteArrayList<>();
+    private TestConfig testConfig;
 
     public Test() {
     }
@@ -49,14 +49,6 @@ public class Test extends Base {
         this.teacher = teacher;
     }
 
-    public TestConfig getTestConfig() {
-        return testConfig;
-    }
-
-    public void setTestConfig(TestConfig testConfig) {
-        this.testConfig = testConfig;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -71,5 +63,13 @@ public class Test extends Base {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public TestConfig getTestConfig() {
+        return testConfig;
+    }
+
+    public void setTestConfig(TestConfig testConfig) {
+        this.testConfig = testConfig;
     }
 }

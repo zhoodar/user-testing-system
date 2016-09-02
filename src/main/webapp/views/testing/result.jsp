@@ -1,9 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   @: Zhoodar
-  Date: 03.08.2016
+  Date: 08.08.2016
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -33,17 +35,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="#">Тестирование</a></li>
-                <li><a href="#">Студенту</a></li>
-                <li><a href="#">Преподователю</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Инфо <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">О программе</a></li>
-                        <li><a href="#">Инструкция</a></li>
-                    </ul>
-                </li>
+                <li ><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li class="active"><a href="${pageContext.servletContext.contextPath}/testing">Тестирование</a></li>
+                <li><a href="${pageContext.servletContext.contextPath}/student">Студенту</a></li>
+                <li><a href="${pageContext.servletContext.contextPath}/teacher">Преподователю</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -52,9 +47,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="page-header">
-                <h2>Most Important Is Education</h2>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h3>Results</h3>
+                </div>
+                <div class="col-sm-4 right">
+                    <jsp:useBean id="date" class="java.util.Date" />
+                    <fmt:formatDate value="${date}" type="date" dateStyle="medium" var="currentdate" />
+                    <p class="lead">Сегодня <c:out value="${currentdate}" /> </p>
+
+                </div>
             </div>
+
 
         </div>
     </div>

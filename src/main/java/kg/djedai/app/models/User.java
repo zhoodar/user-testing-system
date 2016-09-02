@@ -9,6 +9,8 @@ public class User extends Base {
     private String login;
     private String password;
     private Role role;
+    private Teacher teacher;
+    private Student student;
 
 
     public String getLogin() {
@@ -33,6 +35,22 @@ public class User extends Base {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override

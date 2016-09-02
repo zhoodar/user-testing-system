@@ -15,11 +15,11 @@
         <property name="description" column="description" type="string"/>
         <many-to-one name="category"  lazy="false" column="category_id" class="Category" cascade="save-update"/>
         <many-to-one name="teacher"  lazy="false" column="teacher_id" class="Teacher" cascade="save-update"/>
-        <many-to-one name="testConfig"  lazy="false" column="config_id" class="TestConfig" cascade="save-update"/>
         <bag name="questions" table="questions" lazy="false" inverse="true" cascade="all">
             <key column="test_id" not-null="true" />
             <one-to-many class="Question"/>
         </bag>
+        <one-to-one name="testConfig" class="TestConfig" cascade="all"/>
 
     </class>
 

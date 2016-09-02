@@ -1,9 +1,11 @@
+
 <%--
   Created by IntelliJ IDEA.
   @: Zhoodar
   Date: 03.08.2016
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -42,7 +44,7 @@
                         <li><a href="#">Настройки</a></li>
                     </ul>
                 </li>
-                <li> <a href="${pageContext.servletContext.contextPath}/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
+                <li> <a href="${pageContext.servletContext.contextPath}/j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
 
             </ul>
         </div><!--/.nav-collapse -->
@@ -51,12 +53,32 @@
 <!-- Begin page content -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="page-header">
-                <h2>Most Important Is Education</h2>
+        <div class="col-md-12">
+            <p class="lead">Все доступные тесты </p>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Наименование</th>
+                        <th>Создател</th>
+                        <th>Категория</th>
+                        <th>Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${tests}" var="test" varStatus="status">
+                        <tr>
+                            <td>${test.id}</td>
+                            <td>${test.name}</td>
+                            <td>${test.teacher.name}</td>
+                            <td>${test.category}</td>
+                            <td><a href="${pageContext.request.contextPath}/testing/examination/test?id=${test.id}" >пройти тестирование</a></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
-            <p class="lead">
-              Student</p>
         </div>
     </div>
 </div>

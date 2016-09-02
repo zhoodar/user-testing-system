@@ -15,7 +15,6 @@
         <property name="result" column="res_text" type="string"/>
         <property name="score" column="score" type="int"/>
         <property name="date" column="date" type="date"/>
-        <property name="time" column="time" type="time"/>
         <many-to-one name="test"  lazy="false" column="test_id" class="Test" cascade="save-update"/>
 
     </class>

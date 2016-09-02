@@ -4,6 +4,7 @@
   Date: 03.08.2016
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -33,17 +34,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="${pageContext.servletContext.contextPath}/testing/available/tests">Тестирование</a></li>
-                <li><a href="${pageContext.servletContext.contextPath}/student">Студенту</a></li>
-                <li><a href="${pageContext.servletContext.contextPath}/teacher">Преподователю</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Инфо <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">О программе</a></li>
-                        <li><a href="#">Инструкция</a></li>
-                    </ul>
-                </li>
+                <li ><a href="${pageContext.servletContext.contextPath}/"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li class="active"><a href="#">Тестирование</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -52,15 +44,33 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="page-header">
-                <h2>Most Important Is Education</h2>
+            <p class="lead">Все тесты которые доступны </p>
+            <h3 class="sub-header">Тесты</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Наименование</th>
+                        <th>Создател</th>
+                        <th>Категория</th>
+                        <th>Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${tests}" var="test" varStatus="status">
+                    <tr>
+                        <td>${test.id}</td>
+                        <td>${test.name}</td>
+                        <td>${test.teacher.name}</td>
+                        <td>${test.category}</td>
+                        <td><a href="${pageContext.request.contextPath}/testing/examination/test?id=${test.id}" >пройти тестирование</a></td>
+                    </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
-            <p class="lead">
-                Приветствуем Вас в системе тестирования MIIE.
-                Данная система предназначена для создания и проведения тестов в образовательных учереждений.
-                Более подробнее познакомиться с системой можно на странице <a href="#">"Инструкция"</a>.
-                Если у Вас есть логин и пароль для прохождения теста по какой-нибудь теме, заходите во вкладку <a href="#">"Студенту"</a>.
-                При наличии у Вас доступа к созданию тестов - <a href="#">"Преподавателю"</a>.</p>
+
         </div>
     </div>
 </div>

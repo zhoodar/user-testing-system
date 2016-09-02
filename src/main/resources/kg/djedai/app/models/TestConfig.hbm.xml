@@ -8,12 +8,15 @@
         <meta attribute="class-description">
             This class contains the test config detail
         </meta>
-        <id name="id" type="int" column="uid">
-            <generator class="identity"/>
+        <id name="id" type="int" column="test_id">
+            <generator class="foreign">
+                <param name="property">test</param>
+            </generator>
         </id>
         <property name="durationOfQuiz" column="duration" type="int"/>
         <property name="quantityOfQuestions" column="quantity" type="int"/>
         <property name="isActive" column="is_active" type="string"/>
+        <one-to-one name="test"   class="Test" constrained="true"/>
     </class>
 
 </hibernate-mapping>

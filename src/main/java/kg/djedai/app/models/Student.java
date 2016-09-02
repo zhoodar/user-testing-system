@@ -8,7 +8,6 @@ public class Student extends Base {
 
     private String surname;
     private String name;
-    private String lastName;
     private Group group;
     private User user;
 
@@ -26,14 +25,6 @@ public class Student extends Base {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Group getGroup() {
@@ -61,7 +52,6 @@ public class Student extends Base {
 
         if (!surname.equals(student.surname)) return false;
         if (!name.equals(student.name)) return false;
-        if (!lastName.equals(student.lastName)) return false;
         if (!group.equals(student.group)) return false;
         return user.equals(student.user);
 
@@ -71,7 +61,6 @@ public class Student extends Base {
     public int hashCode() {
         int result = surname.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + lastName.hashCode();
         result = 31 * result + group.hashCode();
         result = 31 * result + user.hashCode();
         return result;

@@ -8,7 +8,6 @@ public class Teacher extends Base {
 
     private String surname;
     private String name;
-    private String lastName;
     private User user;
 
     public String getSurname() {
@@ -25,14 +24,6 @@ public class Teacher extends Base {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public User getUser() {
@@ -52,7 +43,6 @@ public class Teacher extends Base {
 
         if (!surname.equals(teacher.surname)) return false;
         if (!name.equals(teacher.name)) return false;
-        if (!lastName.equals(teacher.lastName)) return false;
         return user.equals(teacher.user);
 
     }
@@ -61,7 +51,6 @@ public class Teacher extends Base {
     public int hashCode() {
         int result = surname.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + lastName.hashCode();
         result = 31 * result + user.hashCode();
         return result;
     }

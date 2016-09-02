@@ -8,14 +8,15 @@
         <meta attribute="class-description">
             This class contains the student detail
         </meta>
-        <id name="id" type="int" column="uid">
-            <generator class="identity"/>
+        <id name="id" type="int" column="user_id">
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
         </id>
         <property name="surname" column="surname" type="string"/>
         <property name="name" column="name" type="string"/>
-        <property name="lastName" column="lastname" type="string"/>
         <many-to-one name="group"  lazy="false" column="group_id" class="Group" cascade="save-update"/>
-        <one-to-one name="user"   lazy="false"  class="User" cascade="all"/>
+        <one-to-one name="user" class="User" constrained="true" />
 
     </class>
 
