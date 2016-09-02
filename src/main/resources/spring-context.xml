@@ -34,6 +34,19 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+           <bean class="kg.djedai.app.service.json.HibernateAwareObjectMapper" />
+        </property>
+    </bean>
 
     <context:annotation-config/>
     <context:component-scan base-package="kg.djedai.app"/>
