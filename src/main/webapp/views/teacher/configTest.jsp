@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
   @: Zhoodar
-  Date: 05.08.2016
+  Date: 23.08.2016
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -35,16 +35,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li ><a href="${pageContext.servletContext.contextPath}/teacher">Назад</a></li>
-                <li class="active"><a href="#">Добавить тест</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> ${teacher.surname} ${teacher.name} <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Настройки</a></li>
-                    </ul>
-                </li>
-                <li> <a href="${pageContext.servletContext.contextPath}/j_spring_security_logout"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
+                <li class="active"><a href="#">Конфигурация</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -53,29 +44,29 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-8 col-sm- col-md-8">
-            <h2>Добавление нового теста </h2>
+            <h2>Устонвить конфигурацию </h2>
             <div class="well">
-                <form class="form-horizontal"  action="${pageContext.request.contextPath}/teacher/add/test" method="post">
+                <form class="form-horizontal" action="${pageContext.request.contextPath}/teacher/set/config"  method="post">
+                    <input type="hidden" name="testId" value="${test.id}">
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="Name">Наименование:</label>
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="Name" name="name" placeholder="Введите называние теста">
+                        <label class="control-label col-xs-5" for="Name">Время тестирование в минутах:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" id="Name" name="duration" placeholder="Введите время в минутах">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="group" >Категория:</label>
-                        <div class="col-xs-9">
-                            <select class="form-control" id="group" name="category" >
-                                <c:forEach items="${categories}" var="category" varStatus="status">
-                                    <option value="${category.id}">${category.name}</option>
-                                </c:forEach>
+                        <label class="control-label col-xs-5" for="group" >Статус теста:</label>
+                        <div class="col-xs-7">
+                            <select class="form-control" id="group" name="isActive" >
+                                <option value="true">Активно</option>
+                                <option value="false">Отключено</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="desc">Описание:</label>
-                        <div class="col-xs-9">
-                            <textarea id="desc" name="description" class="form-control" maxlength="100" placeholder="Введите короткое описание"></textarea>
+                        <label class="control-label col-xs-5" for="quantity">Количество вопросов во время теста:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Введите количество вопросов">
                         </div>
                     </div>
                     <div class="row">
@@ -85,7 +76,7 @@
                             <input type="reset" class="btn btn-default" value="Очистить форму">
                         </div>
                         <div class="col-md-5">
-                            <input type="submit" class="btn btn-primary" value="Добавить">
+                            <input type="submit" class="btn btn-primary" value="Устонавить">
                         </div>
                     </div>
                 </form>

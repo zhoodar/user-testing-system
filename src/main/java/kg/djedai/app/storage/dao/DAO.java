@@ -1,6 +1,7 @@
 package kg.djedai.app.storage.dao;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * The interface provides basic implementation of the CRUD operations
@@ -43,14 +44,22 @@ public interface DAO<T> {
     /**
      * Returns the first occurrence of the specified element if the element name's
      * equals with the specified attribute
-     * @param name specified attribute
+     * @param toSearch specified attribute
+     * @param secondToSearch
      * @return the element match
      */
-    T findByName(String name);
+    T findByToSearch(String toSearch, String secondToSearch);
 
     /**
      * Closes the opened session
      */
     void close();
+
+    /**
+     * Returns list of the elements where param id equals element id
+     * @param id element id
+     * @return list of elements
+     */
+    List getByIdOfInnerElement(int id);
 }
 

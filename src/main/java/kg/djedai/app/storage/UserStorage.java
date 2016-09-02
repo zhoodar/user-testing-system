@@ -3,22 +3,20 @@ package kg.djedai.app.storage;
 import kg.djedai.app.models.User;
 import kg.djedai.app.service.HibernateTransaction;
 import kg.djedai.app.storage.dao.DAO;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Zhoodar
  * @since 04.08.2016.
  */
-public class UserStorage implements DAO<User> {
 
-    private final HibernateTransaction hibernateTransaction;
-
-    public UserStorage() {
-        hibernateTransaction = new HibernateTransaction();
-    }
+@Repository
+@Transactional
+public class UserStorage  extends HibernateTransaction implements DAO<User> {
 
 
     /**
@@ -27,7 +25,7 @@ public class UserStorage implements DAO<User> {
      * @return collection of elements
      */
     public Collection<User> getAll() {
-        return this.hibernateTransaction.transaction((Session session)-> session.createQuery("from User").list());
+        return getCurrentSession().createQuery("from User").list();
     }
 
     /**
@@ -36,10 +34,7 @@ public class UserStorage implements DAO<User> {
      * @param user adding object
      */
     public void create(User user) {
-        this.hibernateTransaction.transaction((Session session)-> {
-                    session.save(user); return null;
-                }
-        );
+       getCurrentSession().save(user);
     }
 
     /**
@@ -49,7 +44,7 @@ public class UserStorage implements DAO<User> {
      * @return element at the specified position
      */
     public User read(int id) {
-        return this.hibernateTransaction.transaction((Session session)->session.get(User.class,id));
+        return getCurrentSession().get(User.class,id);
     }
 
     /**
@@ -58,11 +53,8 @@ public class UserStorage implements DAO<User> {
      * @param user element to be stored
      */
     public void update(User user) {
-        this.hibernateTransaction.transaction((Session session) -> {
-                    session.update(user);
-                    return null;
-                }
-        );
+        getCurrentSession().update(user);
+
     }
 
     /**
@@ -71,32 +63,39 @@ public class UserStorage implements DAO<User> {
      * @param user element to be removed
      */
     public void delete(User user) {
-        this.hibernateTransaction.transaction((Session session)-> {
-                    session.delete(user);
-                    return null;
-                }
-        );
+        getCurrentSession().delete(user);
     }
 
     /**
      * Returns the first occurrence of the specified element if the element name's
      * equals with the specified attribute
      *
-     * @param name specified attribute
+     * @param login
+     * @param password specified attribute
      * @return the element match
      */
-    public User findByName(String name) {
-        return this.hibernateTransaction.transaction((Session session)->{
-            final Query query = session.createQuery("from User u where u.login=:name");
-            query.setParameter("name",name);
-            return (User) query.list().iterator().next();
-        });
+    public User findByToSearch(String login, String password) {
+        List list =  getCurrentSession().createQuery("from User u where u.login=:login and u.password=:password")
+                .setParameter("login", login)
+                .setParameter("password",password).list();
+        if(!list.isEmpty())
+            return (User)list.iterator().next();
+        return null;
     }
 
     /**
      * Closes the opened session
      */
     public void close() {
-        this.hibernateTransaction.close();
+    }
+
+    /**
+     * Returns list of the elements where param id equals element id
+     *
+     * @param id element id
+     * @return list of elements
+     */
+    public List getByIdOfInnerElement(int id) {
+        return null;
     }
 }

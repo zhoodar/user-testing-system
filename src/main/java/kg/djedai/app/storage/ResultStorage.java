@@ -2,13 +2,17 @@ package kg.djedai.app.storage;
 
 import kg.djedai.app.models.Result;
 import kg.djedai.app.storage.dao.DAO;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Zhoodar
  * @since 04.08.2016.
  */
+
+@Repository
 public class ResultStorage implements DAO<Result> {
     /**
      * Returns the Collection of elements in a store
@@ -60,10 +64,11 @@ public class ResultStorage implements DAO<Result> {
      * Returns the first occurrence of the specified element if the element name's
      * equals with the specified attribute
      *
-     * @param name specified attribute
+     * @param toSearch specified attribute
+     * @param secondToSearch
      * @return the element match
      */
-    public Result findByName(String name) {
+    public Result findByToSearch(String toSearch, String secondToSearch) {
         return null;
     }
 
@@ -72,5 +77,15 @@ public class ResultStorage implements DAO<Result> {
      */
     public void close() {
 
+    }
+
+    /**
+     * Returns list of the elements where param id equals element id
+     *
+     * @param id element id
+     * @return list of elements
+     */
+    public List getByIdOfInnerElement(int id) {
+        return null;
     }
 }
