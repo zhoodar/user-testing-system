@@ -10,7 +10,7 @@ educational infrastructure and reduce teacher's workload.
 * JSP
 * Bootstrap 3, HTML, CSS
 * AngularJS 
-* IntelJ IDEA
+* IntelliJ IDEA
 * Maven
 * PostgreSQL
 

@@ -19,7 +19,7 @@
             <key column="test_id" not-null="true" />
             <one-to-many class="Question"/>
         </bag>
-        <one-to-one name="testConfig" class="TestConfig" cascade="all"/>
+        <many-to-one name="testConfig" lazy="false" column="config_id" class="TestConfig" cascade="all"/>
 
     </class>
 

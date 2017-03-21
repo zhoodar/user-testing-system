@@ -9,7 +9,6 @@ public class TestConfig extends Base {
     private int durationOfQuiz;
     private int quantityOfQuestions;
     private String isActive;
-    private Test test;
 
     public int getDurationOfQuiz() {
         return durationOfQuiz;
@@ -35,11 +34,4 @@ public class TestConfig extends Base {
         isActive = active;
     }
 
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
-    }
 }

@@ -131,11 +131,11 @@
         <div class="result" ng-show="mode=='result'">
             <h3>Результат</h3><hr/>
             <div class="row">
-                <div class="col-md-6">
-                    <p class="lead">Вы получили {{ totalScored() }}% </p>
+                <div class="col-md-8">
+                    <p class="lead">Вы получили {{ countPoints() }} баллов из возможных {{ totalScore() }} и ответили на {{ totalScored() }}% правильно</p>
                     <ul>
-                        <li>правилных ответов: {{countPoints()}}</li>
-                        <li>неправилных ответов: {{ }}</li>
+                        <li>правильных ответов: {{ correctAnswers() }}</li>
+                        <li>неправильных ответов: {{  totalItems - correctAnswers() }}</li>
                     </ul>
                 </div>
                 <div class="col-md-6"></div>

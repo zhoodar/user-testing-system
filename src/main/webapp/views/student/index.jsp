@@ -61,7 +61,7 @@
                     <tr>
                         <th>#</th>
                         <th>Наименование</th>
-                        <th>Создател</th>
+                        <th>Преподователь</th>
                         <th>Категория</th>
                         <th>Действие</th>
                     </tr>
@@ -69,9 +69,9 @@
                     <tbody>
                     <c:forEach items="${tests}" var="test" varStatus="status">
                         <tr>
-                            <td>${test.id}</td>
+                            <td>${status.index+1}</td>
                             <td>${test.name}</td>
-                            <td>${test.teacher.name}</td>
+                            <td>${test.teacher.surname} ${test.teacher.name}</td>
                             <td>${test.category}</td>
                             <td><a href="${pageContext.request.contextPath}/testing/examination/test?id=${test.id}" >пройти тестирование</a></td>
                         </tr>

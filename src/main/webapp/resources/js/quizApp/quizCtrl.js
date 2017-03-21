@@ -107,13 +107,8 @@ var quizCtrl = function ($scope, $http, helper) {
 
     $scope.totalScore = function () {
         var scores = 0;
-        var counter =0;
         $scope.questions.forEach(function (question, index, array){
-            counter++;
-            if(counter <= $scope.totalItems){
-                scores += question.point;
-                return false;
-            }
+            scores += question.point;
         });
         return scores;
     };

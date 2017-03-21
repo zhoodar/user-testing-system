@@ -55,11 +55,21 @@ public class TeacherController {
         test.setDescription(description);
         test.setTeacher(teacher);
         test.setCategory(this.factory.categoryDAO.read(categoryId));
+        test.setTestConfig(createDefaultConfig());
         this.factory.testDAO.create(test);
         model.addAttribute("test",test);
         model.addAttribute("teacher",teacher);
         return "teacher/QuestionAnswer";
 
+    }
+
+    private TestConfig createDefaultConfig() {
+        TestConfig config = new TestConfig();
+        config.setQuantityOfQuestions(10);
+        config.setDurationOfQuiz(20);
+        config.setIsActive("false");
+        this.factory.testConfigDAO.create(config);
+        return config;
     }
 
     @RequestMapping(value ="/teacher/add/question/test",method = RequestMethod.GET)
@@ -140,18 +150,13 @@ public class TeacherController {
         int testId = Integer.parseInt(param1);
         int duration = Integer.parseInt(param2);
         int quantity = Integer.parseInt(param3);
-        TestConfig testConfig = new TestConfig();
-        testConfig.setTest(factory.testDAO.read(testId));
+        Test test = this.factory.testDAO.read(testId);
+        TestConfig testConfig = test.getTestConfig();
+
         testConfig.setDurationOfQuiz(duration);
         testConfig.setIsActive(isActive);
         testConfig.setQuantityOfQuestions(quantity);
-
-        TestConfig config = factory.testConfigDAO.read(testId);
-        if(config!=null) {
-            factory.testConfigDAO.update(testConfig);
-        } else {
-            factory.testConfigDAO.create(testConfig);
-        }
+        factory.testConfigDAO.update(testConfig);
         return "redirect:/teacher";
     }
 
